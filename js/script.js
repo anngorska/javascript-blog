@@ -124,14 +124,26 @@ function generateTags(){
       console.log('tag', tag)
 
       /* generate HTML of the link */
-
+      const linkHTML = '<li><a href="#' + articleTagsArray + '">' + tag + '</a></li>';
+      console.log('linkHTML:', linkHTML);
 
       /* add generated code to html variable */
+      html = html + linkHTML;
+      console.log('html', html);
 
     /* END LOOP: for each tag */
     }
 
     /* insert HTML of all the links into the tags wrapper */
+    tagsWrapper.innerHTML = html;
+    console.log('tagsWrapper', tagsWrapper);
+
+    const links = document.querySelectorAll(articleTagsArray);
+    console.log('links:', links);
+
+    for(let link of links){
+      link.addEventListener('click', generateTags);
+    }
 
   /* END LOOP: for every article: */
   }
