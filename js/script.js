@@ -115,26 +115,26 @@ function generateTags(){
     const articleTags = article.getAttribute('data-tags');
     console.log('articleTags', articleTags);
 
-    /* split tags into array */
+    /* [DONE]split tags into array */
     const articleTagsArray = articleTags.split(' ');
     console.log('articleTagsArray', articleTagsArray);
 
-    /* START LOOP: for each tag */
+    /* [DONE]START LOOP: for each tag */
     for(let tag of articleTagsArray){
       console.log('tag', tag)
 
-      /* generate HTML of the link */
+      /* [DONE]generate HTML of the link */
       const linkHTML = '<li><a href="#' + articleTagsArray + '">' + tag + '</a></li>';
       console.log('linkHTML:', linkHTML);
 
-      /* add generated code to html variable */
+      /* [DONE]add generated code to html variable */
       html = html + linkHTML;
       console.log('html', html);
 
-    /* END LOOP: for each tag */
+    /* [DONE]END LOOP: for each tag */
     }
 
-    /* insert HTML of all the links into the tags wrapper */
+    /* [DONE]insert HTML of all the links into the tags wrapper */
     tagsWrapper.innerHTML = html;
     console.log('tagsWrapper', tagsWrapper);
 
@@ -145,8 +145,56 @@ function generateTags(){
       link.addEventListener('click', generateTags);
     }
 
-  /* END LOOP: for every article: */
+  /* [DONE]END LOOP: for every article: */
   }
 }
 
 generateTags();
+
+function tagClickHandler(event){
+  /* [DONE]prevent default action for this event */
+  event.preventDefault();
+  console.log('Link was clicked!', event);
+
+  /* [DONE]make new constant named "clickedElement" and give it the value of "this" */
+  const clickedElement = this;
+
+  /* make a new constant "href" and read the attribute "href" of the clicked element */
+  const href = document.getAtribute('href');
+  console.log('href', href);
+
+  /* make a new constant "tag" and extract tag from the "href" constant */
+  const tag = href.querySelector('tag');
+  console.log('tag', tag);
+
+  /* find all tag links with class active */
+
+
+  /* START LOOP: for each active tag link */
+
+    /* remove class active */
+
+  /* END LOOP: for each active tag link */
+
+  /* find all tag links with "href" attribute equal to the "href" constant */
+
+  /* START LOOP: for each found tag link */
+
+    /* add class active */
+
+  /* END LOOP: for each found tag link */
+
+  /* execute function "generateTitleLinks" with article selector as argument */
+}
+
+function addClickListenersToTags(){
+  /* find all links to tags */
+
+  /* START LOOP: for each link */
+
+    /* add tagClickHandler as event listener for that link */
+
+  /* END LOOP: for each link */
+}
+
+addClickListenersToTags();
