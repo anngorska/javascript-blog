@@ -186,12 +186,61 @@ function generateAuthors(){
   /* [DONE]START LOOP: for every article: */
   for(let article of articles){
 
-     /* [DONE]get authors from data-author attribute */
-     const articleAuthor = article.getAttribute('data-author');
+    /* find authors wrapper */
+    const authorWrapper = article.querySelector(optArticleAuthorSelector);
 
     /* [DONE]make html variable with empty string */
     let html = '';
 
+    /* [DONE]get authors from data-author attribute */
+    const articleAuthor = article.getAttribute('data-author');
+
+    /* [DONE] generate HTML of the link */
+    const linkHTML = '<li><a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span></a></li>';
+
+    /* [DONE] add generated code to html variable */
+    html = html + linkHTML;
+
+    /* [DONE] END LOOP: for each tag */
+    authorWrapper.innerHTML = html;
   }
 }
 generateAuthors();
+
+function authorClickHandler(event){
+  /* [DONE]prevent default action for this event */
+  event.preventDefault();
+
+  /* [DONE]make new constant named "clickedElement" and give it the value of "this" */
+  const clickedElement = this;
+
+  /* [DONE]make a new constant "href" and read the attribute "href" of the clicked element */
+  const href = clickedElement.getAttribute('href');
+
+  /* [DONE]make a new constant "author" and extract author from the "href" constant */
+  const author = href.replace('#author-', '');
+
+  /* [DONE]find all author links with class active */
+  const activeAuthorLinks = document.querySelectorAll('a.active[href^="#author-"]');
+
+  /* [DONE]START LOOP: for each active author link */
+  for(let activeAuthorLink of activeAuthorLinks){
+    /* [DONE]remove class active */
+    activeAuthorLink.classList.remove('active');
+    /* [DONE]END LOOP: for each active author link */
+  }
+
+  /* [DONE]find all author links with "href" attribute equal to the "href" constant */
+  const authorLinks = document.querySelectorAll('a[href="' + href + '"]');
+
+  /* [DONE]START LOOP: for each found author link */
+  for(let authorLink of authorLinks){
+    /* [DONE]add class active */
+    authorLink.classList.add('active');
+    /* [DONE]END LOOP: for each found author link */
+  }
+
+  /* [DONE]execute function "generateTitleLinks" with article selector as argument */
+  generateTitleLinks('[data-authors~="' + author + '"]');
+}
+

@@ -4,6 +4,7 @@
 
 $color-light: #fff;
 $color-dark: #444;
+$color-green: rgba(0, 128, 0, 0.945);
 
 $font-logo: 'Sacramento', cursive;
 $font-header: 'Oswald', sans-serif;
@@ -87,6 +88,7 @@ body {
 
     .active {
         font-weight: bold;
+        color: $color-green;
     }
 }
 
@@ -126,4 +128,10 @@ body {
     p {
         margin: 0 10px 0 0;
     }
+}
+
+a {
+  color: $color-dark;
+  text-decoration: none;
+  text-transform: none;
 }
