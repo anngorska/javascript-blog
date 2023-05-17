@@ -26,7 +26,7 @@ function titleClickHandler(event){
 
   /* [DONE] get 'href' attribute from the clicked link */
 
-  const articleSelector = this.getAttribute('href');
+  const articleSelector = clickedElement.getAttribute('href');
 
   /* [DONE] find the correct article using the selector (value of 'href' attribute) */
 
@@ -58,7 +58,7 @@ function generateTitleLinks(customSelector = ''){
 
     /* [DONE] get the article id */
 
-    const articleID = article.id;
+    const articleID = article.getAttribute('id');
 
     /* [DONE] find the title element */
     /* [DONE] get the title from the title element */
@@ -201,7 +201,7 @@ function generateAuthors(){
     /* [DONE] add generated code to html variable */
     html = html + linkHTML;
 
-    /* [DONE] END LOOP: for each tag */
+    /* [DONE] END LOOP: for each author */
     authorWrapper.innerHTML = html;
   }
 }
@@ -241,6 +241,19 @@ function authorClickHandler(event){
   }
 
   /* [DONE]execute function "generateTitleLinks" with article selector as argument */
-  generateTitleLinks('[data-authors~="' + author + '"]');
+  generateTitleLinks('[data-authors="' + author + '"]');
 }
+
+function addClickListenersToAuthors(){
+ /* [DONE]find all links to authors */
+ const authors = document.querySelectorAll('.post-author a');
+
+ /* [DONE]START LOOP: for each link */
+ for(let author of authors){
+   /* [DONE]add authorClickHandler as event listener for that link */
+   author.addEventListener('click', authorClickHandler);
+ /* END LOOP: for each link */
+ }
+}
+addClickListenersToAuthors();
 
