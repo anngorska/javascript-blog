@@ -5,6 +5,7 @@
 $color-light: #fff;
 $color-dark: #444;
 $color-green: rgba(0, 128, 0, 0.945);
+$color-greenlight: rgba(115, 175, 115, 0.945);
 
 $font-logo: 'Sacramento', cursive;
 $font-header: 'Oswald', sans-serif;
@@ -93,10 +94,9 @@ body {
 }
 
 .list-horizontal {
-    li {
+    ul {
         display: inline-block;
         padding-right: 5px;
-
     }
 }
 
@@ -134,4 +134,38 @@ a {
   color: $color-dark;
   text-decoration: none;
   text-transform: none;
+}
+
+.tag-size-1 {
+  font-size: 100%;
+  color: $color-greenlight;
+}
+
+.tag-size-2 {
+  font-size: 150%;
+  color: $color-greenlight;
+}
+
+.tag-size--3 {
+  font-size: 200%;
+  color: $color-greenlight;
+}
+
+.tag-size-4 {
+  font-size: 250%;
+  color: $color-green;
+}
+
+.tag-size-5 {
+  font-size: 300%;
+  color: $color-green;
+}
+
+ul.list.tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.tags a{
+  padding: 5px;
 }
