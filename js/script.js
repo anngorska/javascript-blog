@@ -42,7 +42,7 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post-author',
-  optTagsListSelector = '.tags .list';
+  optTagsListSelector = '.list.tags';
 
 function generateTitleLinks(customSelector = ''){
 
@@ -83,8 +83,27 @@ function generateTitleLinks(customSelector = ''){
 }
 generateTitleLinks();
 
+function calculateTagsParams(tags){
+
+  const params = {
+    max: 0,
+    min: 999999
+  }
+
+  for(let tag in tags){
+    if(tags[tag] > params.max) {
+      params.max = tags[tag];
+    }
+    else(tags[tag] < params.min); {
+      params.min = tags[tag];
+    }
+  }
+
+  return params;
+}
+
 function generateTags(){
-  /* [NEW] create a new variable allTags with an empty array */
+  /* [NEW] create a new variable allTags with an empty object */
   let allTags = {};
 
   /* [DONE]find all articles */
@@ -116,11 +135,13 @@ function generateTags(){
       html = html + linkHTML;
 
       /* [NEW] check if this link is NOT already in allTags */
-      if(allTags.indexOf(linkHTML) == -1){
-        /* [NEW] add generated code to allTags array */
-        allTags.push(linkHTML);
+      if(!allTags.hasOwnProperty(tag)){
+        /* [NEW] add tag to allTags object */
+        allTags[tag] = 1;
+      } else {
+        allTags[tag]++;
       }
-      console.log('allTags', allTags);
+
 
     /* [DONE]END LOOP: for each tag */
     }
@@ -138,10 +159,23 @@ function generateTags(){
   }
   /* [NEW] find list of tags in right column */
   const tagList = document.querySelector(optTagsListSelector);
+  console.log('tagList:', tagList)
 
-  /* [NEW] add html from allTags to tagList */
-  tagList.innerHTML = allTags.join(' ');
+  const tagsParams = calculateTagsParams(allTags);
+  console.log('tagsParams:', tagsParams)
 
+  /* [NEW] create variable for all links HTML code */
+  let allTagsHTML = '';
+
+  /* [NEW] START LOOP: for each tag in allTags: */
+  for(let tag in allTags){
+    /* [NEW] generate code of a link and add it to allTagsHTML */
+    allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+    /* [NEW] END LOOP: for each tag in allTags: */
+  }
+
+  /* [NEW] add html from allTagsHTML to tagList */
+   tagList.innerHTML = allTagsHTML;
 }
 generateTags();
 
@@ -156,7 +190,7 @@ function tagClickHandler(event){
   const href = clickedElement.getAttribute('href');
 
   /* [DONE]make a new constant "tag" and extract tag from the "href" constant */
-  const tag = href.replace('#tag-', '');
+  const tag = href.replace('#tag-','');
 
   /* [DONE]find all tag links with class active */
   const activeTagLinks = document.querySelectorAll('a.active[href^="#tag-"]');
