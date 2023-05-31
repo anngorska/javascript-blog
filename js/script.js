@@ -94,7 +94,7 @@ function calculateTagsParams(tags){
   const params = {
     max: 0,
     min: 999999
-  }
+  };
 
   for(let tag in tags){
     if(tags[tag] > params.max) {
@@ -173,10 +173,10 @@ function generateTags(){
   }
   /* [NEW] find list of tags in right column */
   const tagList = document.querySelector(opts.tagsListSelector);
-  console.log('tagList:', tagList)
+  console.log('tagList:', tagList);
 
   const tagsParams = calculateTagsParams(allTags);
-  console.log('tagsParams:', tagsParams)
+  console.log('tagsParams:', tagsParams);
 
   /* [NEW] create variable for all links HTML code */
   let allTagsHTML = '';
@@ -192,7 +192,7 @@ function generateTags(){
   }
 
   /* [NEW] add html from allTagsHTML to tagList */
-   tagList.innerHTML = allTagsHTML;
+  tagList.innerHTML = allTagsHTML;
 }
 generateTags();
 
@@ -214,9 +214,9 @@ function tagClickHandler(event){
 
   /* [DONE]START LOOP: for each active tag link */
   for(let activeTagLink of activeTagLinks){
-     /* [DONE]remove class active */
+    /* [DONE]remove class active */
     activeTagLink.classList.remove('active');
-      /* [DONE]END LOOP: for each active tag link */
+    /* [DONE]END LOOP: for each active tag link */
   }
 
   /* [DONE]find all tag links with "href" attribute equal to the "href" constant */
@@ -270,12 +270,13 @@ function generateAuthors(){
     /* [DONE] add generated code to html variable */
     html = html + linkHTML;
 
-      /* [NEW] check if this link is NOT already in allAuthorsList */
-      if(!allAuthorsList.hasOwnProperty(articleAuthor)){
-        allAuthorsList[articleAuthor] = 1;
-      } else {
-        allAuthorsList[articleAuthor]++;
-      }
+    /* [NEW] check if this link is NOT already in allAuthorsList */
+    if(!allAuthorsList.hasOwnProperty(articleAuthor)){
+      allAuthorsList[articleAuthor] = 1;
+    } else {
+      allAuthorsList[articleAuthor]++;
+    }
+
 
     /* [DONE] END LOOP: for each author */
     authorWrapper.innerHTML = html;
@@ -330,15 +331,15 @@ function authorClickHandler(event){
 }
 
 function addClickListenersToAuthors(){
- /* [DONE]find all links to authors */
- const allAuthorLinks = document.querySelectorAll('a[href^="#author-"]');
+  /* [DONE]find all links to authors */
+  const allAuthorLinks = document.querySelectorAll('a[href^="#author-"]');
 
- /* [DONE]START LOOP: for each link */
- for(let allAuthorLink of allAuthorLinks){
-   /* [DONE]add authorClickHandler as event listener for that link */
-   allAuthorLink.addEventListener('click', authorClickHandler);
- /* END LOOP: for each link */
- }
+  /* [DONE]START LOOP: for each link */
+  for(let allAuthorLink of allAuthorLinks){
+  /* [DONE]add authorClickHandler as event listener for that link */
+    allAuthorLink.addEventListener('click', authorClickHandler);
+  /* END LOOP: for each link */
+  }
 }
 addClickListenersToAuthors();
 
